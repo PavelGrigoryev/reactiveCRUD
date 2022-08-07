@@ -1,0 +1,31 @@
+###добавление нового юзера
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "Сид",
+  "email": "GoogleChrome@Gmail.com"
+}
+
+###получения всех юзеров
+GET http://localhost:8080/users
+Accept: application/json
+
+###получения юзера по id
+GET http://localhost:8080/users/1
+Accept: application/json
+
+###обновление юзера
+PUT http://localhost:8080/users/1
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "Сара",
+  "email": "Sarah@yandex.zu"
+}
+
+###удаление юзера
+DELETE http://localhost:8080/users/1
+Content-Type: application/json
