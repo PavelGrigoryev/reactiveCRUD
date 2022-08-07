@@ -16,17 +16,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<User> save(User user) {
-        return this.userRepository.save(user);
+        return this.userRepository.save(user).log();
     }
 
     @Override
     public Flux<User> findAll() {
-        return this.userRepository.findAll();
+        return this.userRepository.findAll().log();
     }
 
     @Override
     public Mono<User> findById(String id) {
-        return this.userRepository.findById(id);
+        return this.userRepository.findById(id).log();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
                     u.setEmail(user.getEmail());
                     u.setName(user.getName());
                     return save(u);
-                }).switchIfEmpty(Mono.empty());
+                }).switchIfEmpty(Mono.empty()).log();
     }
 
     @Override
@@ -47,6 +47,6 @@ public class UserServiceImpl implements UserService {
                 .findById(id)
                 .flatMap(user -> this.userRepository
                         .deleteById(user.getId())
-                        .thenReturn(user));
+                        .thenReturn(user)).log();
     }
 }
