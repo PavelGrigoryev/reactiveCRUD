@@ -21,7 +21,6 @@ PUT http://localhost:8080/users/1
 Content-Type: application/json
 
 {
-  "id": "1",
   "name": "Сара",
   "email": "Sarah@yandex.zu"
 }
