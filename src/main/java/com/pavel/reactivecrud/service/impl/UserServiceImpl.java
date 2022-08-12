@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
         return this.userRepository
                 .findById(id)
                 .flatMap(u -> {
-                    u.setId(id);
                     u.setEmail(user.getEmail());
                     u.setName(user.getName());
                     return save(u);

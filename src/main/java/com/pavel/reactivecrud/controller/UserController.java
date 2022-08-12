@@ -9,29 +9,30 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@RequestMapping("/users")
 @RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<User> save(@RequestBody User user) {
         return this.userService.save(user);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     private Flux<User> findAll() {
         return this.userService.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("{id}")
     private Mono<User> findUserById(@PathVariable("id") String id) {
         return this.userService.findById(id);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("{id}")
     private Mono<ResponseEntity<User>> update(@PathVariable("id") String id, @RequestBody User user) {
         return this.userService.update(id, user)
                 .flatMap(u -> Mono.just(ResponseEntity
@@ -41,7 +42,7 @@ public class UserController {
                         .build()));
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("{id}")
     private Mono<ResponseEntity<String>> delete(@PathVariable("id") String id) {
         return this.userService.delete(id)
                 .flatMap(user -> Mono.just(ResponseEntity

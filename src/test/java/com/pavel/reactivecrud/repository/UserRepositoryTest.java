@@ -8,7 +8,7 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
-import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,7 +35,7 @@ class UserRepositoryTest {
     @Test
     public void shouldSaveAndFetchUsers() {
         StepVerifier.create(userRepository.findAll())
-                .recordWith(ArrayList::new)
+                .recordWith(ConcurrentLinkedQueue::new)
                 .thenConsumeWhile(user -> true)
                 .consumeRecordedWith(users -> {
                     assertThat(users).hasSize(3);
